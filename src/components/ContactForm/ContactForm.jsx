@@ -1,40 +1,42 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addContact } from '../../redux/contactsSlice'
-import { getContacts } from '../../redux/selectors'
-import { nanoid } from 'nanoid'
+import { addContactNew } from '../../redux/contactsSlice'
+import { selectContacts } from '../../redux/selectors'
 
 import css from './ContactForm.module.css'
 
 
  const ContactForm = () => { 
 	const dispatch = useDispatch();
-	const contacts = useSelector(getContacts);
+	const contacts = useSelector(selectContacts);
 
-	 const createContact = (e) => {
+	const handleCreateContact = (e) => {
 		e.preventDefault();
 		 
-		const name = e.target[0].value;
-		const number = e.target[1].value;
+		const name = e.currentTarget.elements.name.value;
+		const phone = e.currentTarget.elements.phone.value;
+		// const name = e.target[0].value;
+		// const phone = e.target[1].value;
 
 		const newContact = {
-			name: name,
-			number: number,
-			id: nanoid(),
+			name,
+			phone,
+			// база данных бека сама добавляет id
+			// id: nanoid(),
 		}
 
-		const isDuplicated = contacts.find((el) => el.name === name && el.number === number)
+		const isDuplicated = contacts.find((el) => el.name === name && el.phone === phone)
 		if (isDuplicated) {
 			return alert(`${name} is already in contacts.`)
 		}
 			
-		dispatch(addContact(newContact));
-		 
-		e.target[0].value = '';
-		e.target[1].value = '';	
+		dispatch(addContactNew(newContact));		 
+		e.currentTarget.reset();
+		// e.target[0].value = '';
+		// e.target[1].value = '';	
 	}
     
 	return (
-		<form onSubmit={createContact} className={css.form}>
+		<form onSubmit={handleCreateContact} className={css.form}>
 			<div className={css.wrapper}>
 				<label className={css.formLabel}>
 					Name
@@ -45,7 +47,9 @@ import css from './ContactForm.module.css'
 				<label className={css.formLabel}>
 					Phone
 				</label>
-				<input type="tel" name="number" className={css.formInput} required /> 
+				<input type="text" name="phone" className={css.formInput} required /> 
+				{/* type ? add validation */}
+				{/* <input type="tel" name="phone" className={css.formInput} required />  */}
 			</div>
 			<button type='submit' className={css.btn}>
 				Add contact
