@@ -40,7 +40,7 @@ const ContactList = () => {
                     <li key={id}>
                         <p className={css.contactName}>{name}: </p>
                         <p className={css.contactNumber}>{phone}</p>
-                        <button type='button' className={css.btn} onClick={() => dispatch(handleDeleteContact(id))}>Delete</button>
+                        <button type='submit' className={css.btn} onClick={() => handleDeleteContact(id)}>Delete</button>
                         {/* <button type='button' className={css.btn} onClick={() => dispatch(deleteContactById(id))}>Delete</button> */}
                     </li>
                 ))
@@ -50,6 +50,8 @@ const ContactList = () => {
     )
 }
 
+
+export default ContactList
 
     // const filteredContacts = contacts !== null && contacts.filter(contact =>
     //         contact.title.toLowerCase().includes(filter.toLowerCase().trim())
@@ -78,4 +80,3 @@ const ContactList = () => {
 // }
 
 
-export default ContactList

@@ -6,7 +6,7 @@ import { store } from "./redux/store"
 import './index.css'
 
 
-const root = document.getElementById('root')
+const root = document.getElementById("root")
 ReactDOM.createRoot(root).render(
     <Provider store={store}>
         <App />
