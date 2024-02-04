@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addContactNew } from '../../redux/contactsSlice'
+import { addContactNew } from '../../redux/operations'
 import { selectContacts } from '../../redux/selectors'
 
 import css from './ContactForm.module.css'
